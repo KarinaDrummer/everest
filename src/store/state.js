@@ -5,18 +5,17 @@ export default {
     emotions: 0,
   },
   stages: {
-    current: 'start',
     start: {
-      
+      isActive: true,
     },
     question: {
-      
+      isActive: false,
     },
     answer: {
-      
+      isActive: false,
     },
     finish: {
-      
+      isActive: false,
     },
   },
 };

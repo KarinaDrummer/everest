@@ -1,36 +1,44 @@
 <template>
-  <div class="error-screen">
-    <div class="code" v-text="errorCode" />
-    <div class="message">{{errorMessage}}</div>
+  <div>
+    <div class="error-screen">
+      <div
+        class="code"
+        v-text="code"
+      />
+      <div
+        class="message"
+        v-text="errorMessage"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'error',
-  props: {
-    code: String,
-    message: String,
-  },
-  data: vm => ({
-    errorCode: vm.code ? Number(vm.code) : 404,
-  }),
-  computed: {
-    errorMessage: (vm) => {
-      if (vm.message) {
-        return vm.message;
-      }
-      switch (vm.errorCode) {
-        case 404:
-          return 'Not found';
-        case 418:
-          return 'Programmer\'s DNA error';
-        default:
-          return 'Undefined error';
-      }
+  export default {
+    name: 'Error',
+    props: {
+      code: {
+        type: String,
+        default: '404',
+      },
+      message: {
+        type: String,
+        default: 'Not found',
+      },
     },
-  },
-};
+    computed: {
+      errorMessage: (vm) => {
+        switch (vm.errorCode) {
+          case '418':
+            return 'Programmer\'s DNA error'
+          case '000':
+            return 'Undefined error'
+          default:
+            return vm.message
+        }
+      },
+    },
+  }
 </script>
 
 <style lang="sass">

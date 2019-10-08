@@ -1,16 +1,13 @@
 <template>
   <v-card>
     <v-card-text
-      v-text="'1/10'"
-    />
-    <v-card-text
-      v-text="'Текст вопроса'"
+      v-text="'Текст реакции'"
     />
     <v-card-actions>
       <v-btn
         block
-        outlined
-        v-text="'Ответ'"
+        color="primary"
+        v-text="'Дальше'"
       />
     </v-card-actions>
   </v-card>
@@ -18,6 +15,6 @@
 
 <script>
   export default {
-    name: 'Question',
+    name: 'Answer',
   }
 </script>

@@ -1,6 +1,8 @@
 <template>
   <v-card>
-    <v-card-title>Finish</v-card-title>
+    <v-card-text
+      v-text="'Заголовок результата'"
+    />
     <v-card-text
       v-text="'Текст результата'"
     />

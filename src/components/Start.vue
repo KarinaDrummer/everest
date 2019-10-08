@@ -1,6 +1,8 @@
 <template>
-  <v-card class="start">
-    <v-card-title>На Эверест любой ценой!</v-card-title>
+  <v-card>
+    <v-card-title
+      v-text="'Заголовок с сервера'"
+    />
     <v-card-text
       v-text="'Текст с сервера'"
     />
@@ -8,7 +10,6 @@
       <v-btn
         block
         color="error"
-        text
         v-text="'Поехали'"
       />
     </v-card-actions>
@@ -20,12 +21,18 @@
     name: 'Start',
     components: {
     },
+    methods: {
+      start: () => {
+
+      },
+    },
   }
 </script>
 
 <style lang="sass">
   .v-card
     width: 498px
+    padding: 8px
 
     .v-card__title
       display: flex

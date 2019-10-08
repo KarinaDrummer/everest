@@ -7,9 +7,6 @@
 <script>
   export default {
     name: 'Layout',
-    mounted () {
-      console.log(this.$vuetify.theme)
-    },
   }
 </script>
 
@@ -31,7 +28,7 @@ html
     z-index: -1
     display: block
     content: ""
-    background-color: rgba(0, 0, 0, 0.5)
+    background-color: rgba(0, 0, 0, 0.2)
 
 .app-wrapper
   height: 100%
