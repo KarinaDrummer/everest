@@ -1,9 +1,16 @@
 /* eslint-disable */
 export default {
-  player: {
-    strength: 0,
-    emotions: 0,
+  character: {
+    features: {},
   },
+
+  gameUid: '',
+
+  attributes: {
+    title: 'No data',
+    description: '',
+  },
+
   stages: {
     start: {
       isActive: true,
