@@ -1,19 +1,20 @@
 <template>
-  <v-card max-width="498">
+  <v-card>
     <v-card-title>Question</v-card-title>
-    <v-card-text>test</v-card-text>
+    <v-card-text
+      v-text="'Текст вопроса'"
+    />
     <v-card-actions>
-      <v-btn text>Поехали!</v-btn>
+      <v-btn
+        text
+        v-text="'Ответ'"
+      />
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-export default {
-  name: 'question',
-};
+  export default {
+    name: 'Question',
+  }
 </script>
-
-<style>
-
-</style>

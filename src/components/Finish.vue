@@ -1,19 +1,20 @@
 <template>
-  <v-card max-width="498">
+  <v-card>
     <v-card-title>Finish</v-card-title>
-    <v-card-text>test</v-card-text>
+    <v-card-text
+      v-text="'Текст результата'"
+    />
     <v-card-actions>
-      <v-btn text>Сыграть ещё раз</v-btn>
+      <v-btn
+        text
+        v-text="'Сыграть ещё раз'"
+      />
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-export default {
-  name: 'finish',
-};
+  export default {
+    name: 'Finish',
+  }
 </script>
-
-<style>
-
-</style>
