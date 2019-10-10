@@ -25,7 +25,13 @@
       "
       v-text="'Основные показатели, по которым начисляем баллы:'"
     />
-    <player-stats />
+    <player-stats
+      class="
+        justify-space-around
+        pa-0
+        mb-2
+      "
+    />
     <div
       class="
         image-wrapper
@@ -62,21 +68,19 @@
   import PlayerStats from './PlayerStats.vue'
 
   export default {
-    name: 'Start',
+    name: 'Greeting',
     components: {
       PlayerStats,
     },
-    computed: mapState({
-      title: state => state.game.title,
-      description: state => state.game.description,
-      image: state => state.game.image,
-    }),
-    mounted () {
-      this.getGameInfo()
+    computed: {
+      ...mapState({
+        title: s => s.game.title,
+        description: s => s.game.description,
+        image: s => s.game.image,
+      }),
     },
     methods: {
       ...mapActions([
-        'getGameInfo',
         'startGame',
       ]),
     },
