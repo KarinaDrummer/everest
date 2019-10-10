@@ -5,25 +5,30 @@
 </template>
 
 <script>
-  import Start from '@/components/Start.vue'
+  import { mapState, mapActions } from 'vuex'
+  import Greeting from '@/components/Greeting.vue'
   import Question from '@/components/Question.vue'
   import Reaction from '@/components/Reaction.vue'
-  import Finish from '@/components/Finish.vue'
-  import Error from './Error.vue'
 
   export default {
     name: 'App',
     components: {
-      Start,
+      Greeting,
       Question,
       Reaction,
-      Finish,
-      Error,
     },
     data: () => ({
     }),
-    computed: {
-      stage: vm => vm.$store.state.game.stage,
+    computed: mapState({
+      stage: s => s.game.stage,
+    }),
+    created () {
+      this.getCurrentStage()
+    },
+    methods: {
+      ...mapActions([
+        'getCurrentStage',
+      ]),
     },
   }
 </script>
@@ -35,5 +40,5 @@
       color: #ffffff !important
 
     .v-image
-      border-radius: 4px
+      border-radius: 4px    
 </style>
