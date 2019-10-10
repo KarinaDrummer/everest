@@ -42,16 +42,20 @@
         pa-3
       "
     >
-      <v-btn
+      <button
         v-for="answer in answers"
         :key="answer.id"
+        v-ripple
         block
         color="brown"
-        @click="answerQuestion(answerId)"
-        class="my-1"
+        class="
+          my-1
+          multiline-button
+        "
+        @click="answerQuestion(answer.id)"
       >
         {{ answer.text }}
-      </v-btn>
+      </button>
     </v-card-actions>
   </v-card>
 </template>
@@ -86,6 +90,11 @@
     .v-btn
       text-transform: none
       font-weight: 300
+
     .v-btn.v-btn + .v-btn
       margin: 0
+
+  .multiline-button
+    border-radius: 4px
+    outline: none
 </style>

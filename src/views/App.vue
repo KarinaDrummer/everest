@@ -40,5 +40,5 @@
       color: #ffffff !important
 
     .v-image
-      border-radius: 4px    
+      border-radius: 4px
 </style>
