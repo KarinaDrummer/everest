@@ -21,16 +21,16 @@
       snackbar: false,
       snackbarText: '',
     }),
-    methods: {
-      showError(message) {
-        this.snackbarText = message
-        this.snackbar = true
-      }
-    },
     mounted () {
       window.addEventListener('apiHandlerError', (event) => {
         this.showError(event.message)
       })
+    },
+    methods: {
+      showError (message) {
+        this.snackbarText = message
+        this.snackbar = true
+      },
     },
   }
 </script>
