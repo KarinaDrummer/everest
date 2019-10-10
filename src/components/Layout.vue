@@ -53,7 +53,7 @@ html
     z-index: -1
     display: block
     content: ""
-    background-color: rgba(0, 0, 0, 0.4)
+    background-color: rgba(0, 0, 0, 0.5)
 
 .app-wrapper
   height: 100%
