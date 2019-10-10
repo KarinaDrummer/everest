@@ -1,18 +1,27 @@
+import * as Cookies from 'js-cookie'
+
 export default {
-  getGameDescription (state, payload) {
-    console.log(payload)
-    const attrs = payload.attributes
+  getGameInfo (state, payload) {
+    const data = payload.attributes
 
-    state.attributes = {
-      title: attrs.name,
-      description: attrs.description,
-      image: attrs.image,
+    state.game = {
+      ...state.game,
+      title: data.name,
+      description: data.description,
+      image: data.image,
     }
-
-    // state.character.features.push()
   },
 
-  startGame (state) {
+  getGameUUID (state, payload) {
+    state.game.UUID = payload
+  },
 
+  startGame (state, payload) {
+    state.game.stage = 'question'
+  },
+
+  getPlayerStats (state, payload) {
+    // state.character.features.push()
+    state.player.stats = payload
   },
 }

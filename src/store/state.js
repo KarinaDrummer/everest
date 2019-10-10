@@ -1,28 +1,14 @@
-/* eslint-disable */
 export default {
-  character: {
-    features: {},
+  player: {
+    stats: {},
   },
 
-  gameUid: '',
-
-  attributes: {
+  game: {
+    UUID: '',
+    stage: 'start',
+    questionNumber: 0,
     title: 'No data',
     description: '',
+    image: '',
   },
-
-  stages: {
-    start: {
-      isActive: true,
-    },
-    question: {
-      isActive: false,
-    },
-    answer: {
-      isActive: false,
-    },
-    finish: {
-      isActive: false,
-    },
-  },
-};
+}
