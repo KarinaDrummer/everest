@@ -6,25 +6,22 @@ Test exercise for ITLeague
 yarn
 ```
 
-### Compiles and hot-reloads for development
+### Compile and enable hot-reloader for development
 ```
 yarn run serve
 ```
 
-### Compiles and minifies for production
+### Compile and minify for production
 ```
 yarn run build
 ```
 
-### Run your tests
+### Run tests
 ```
 yarn run test
 ```
 
-### Lints and fixes files
+### Lint and fixe files
 ```
 yarn run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
