@@ -21,7 +21,7 @@ yarn run build
 yarn run test
 ```
 
-### Lint and fixe files
+### Lint and fix files
 ```
 yarn run lint
 ```
