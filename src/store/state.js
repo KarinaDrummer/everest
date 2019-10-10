@@ -1,6 +1,12 @@
 export default {
   player: {
-    stats: {},
+    stats: [
+      {
+        name: '',
+        icon: '',
+        value: 0,
+      },
+    ],
   },
 
   game: {

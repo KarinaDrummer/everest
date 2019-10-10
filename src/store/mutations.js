@@ -2,14 +2,21 @@ import * as Cookies from 'js-cookie'
 
 export default {
   getGameInfo (state, payload) {
-    const data = payload.attributes
+    const gameInfo = payload.attributes
+    const playerInfo =
+      Object.values(payload.relationships.characteristics.data)
 
     state.game = {
       ...state.game,
-      title: data.name,
-      description: data.description,
-      image: data.image,
+      title: gameInfo.name,
+      description: gameInfo.description,
+      image: gameInfo.image,
     }
+
+    state.player.stats = playerInfo.map(stat => ({
+      name: stat.attributes.name,
+      icon: stat.attributes.icon,
+    }))
   },
 
   getGameUUID (state, payload) {
@@ -18,10 +25,7 @@ export default {
 
   startGame (state, payload) {
     state.game.stage = 'question'
-  },
 
-  getPlayerStats (state, payload) {
-    // state.character.features.push()
-    state.player.stats = payload
+    // state
   },
 }
