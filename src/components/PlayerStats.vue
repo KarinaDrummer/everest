@@ -4,9 +4,6 @@
       player-stats
       d-flex
       flex-wrap
-      justify-space-around
-      pa-0
-      mb-2
     "
   >
     <li
@@ -23,7 +20,9 @@
         :src="stat.icon"
         class="mr-1"
       >
-      {{ stat.name }}
+      <span>
+        {{ stat.name }}{{ !greeting ? ': ' + stat.value : '' }}
+      </span>
     </li>
   </ul>
 </template>
@@ -34,7 +33,8 @@
   export default {
     name: 'PlayerStats',
     computed: mapState({
-      stats: state => state.player.stats,
+      stats: s => s.player.stats,
+      greeting: s => s.game.stage === 'greeting',
     }),
   }
 </script>
