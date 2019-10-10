@@ -1,12 +1,37 @@
 <template>
   <v-app>
     <router-view class="app-wrapper" />
+    <v-snackbar v-model="snackbar">
+      {{ snackbarText }}
+      <v-btn
+        color="pink"
+        text
+        @click="snackbar = !snackbar"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
   export default {
     name: 'Layout',
+    data: () => ({
+      snackbar: false,
+      snackbarText: '',
+    }),
+    methods: {
+      showError(message) {
+        this.snackbarText = message
+        this.snackbar = true
+      }
+    },
+    mounted () {
+      window.addEventListener('apiHandlerError', (event) => {
+        this.showError(event.message)
+      })
+    },
   }
 </script>
 
@@ -28,7 +53,7 @@ html
     z-index: -1
     display: block
     content: ""
-    background-color: rgba(0, 0, 0, 0.2)
+    background-color: rgba(0, 0, 0, 0.4)
 
 .app-wrapper
   height: 100%
@@ -36,4 +61,8 @@ html
   flex-direction: column
   align-items: center
   justify-content: center
+
+  .v-card__text a
+    color: #fdff8c
+    text-decoration: none
 </style>
