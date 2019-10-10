@@ -30,25 +30,10 @@
 
 <style lang="sass">
   .v-card
-    width: 498px
-    padding: 8px
-
-    .v-card__title
-      display: flex
-      justify-content: center
-
     .v-card__text
-      text-align: center
-
-    .image-wrapper
-      display: flex
-      justify-content: center
-      padding: 8px
+      line-height: 1.5
+      color: #ffffff !important
 
     .v-image
       border-radius: 4px
-
-    .v-card__actions
-      display: flex
-      flex-direction: column
 </style>
