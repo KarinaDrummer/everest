@@ -30,6 +30,35 @@ export default {
           current_game_id: gameUUID,
         },
       )
+      return response.data.data
+    } catch (error) {
+      errorHandler(error)
+      throw new Error(error)
+    }
+  },
+
+  continueGame: async (gameUUID) => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/current?current_game_id=${gameUUID}`
+      )
+      return response.data.data
+    } catch (error) {
+      errorHandler(error)
+      throw new Error(error)
+    }
+  },
+
+  answerQuestion: async (gameUUID, questionId, answerId) => {
+    try {
+      const response = await axios.post(
+        `${baseUrl}/answer`,
+        {
+          current_game_id: gameUUID,
+          question_id: questionId,
+          answer_id: answerId,
+        },
+      )
       console.log(response)
       return response.data
     } catch (error) {
