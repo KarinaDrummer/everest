@@ -1,13 +1,6 @@
 <template>
   <div>
-    <start v-if="start" />
-    <question v-else-if="question" />
-    <reaction v-else-if="reaction" />
-    <finish v-else-if="finish" />
-    <error
-      v-else
-      code="418"
-    />
+    <component :is="stage" />
   </div>
 </template>
 
@@ -17,9 +10,6 @@
   import Reaction from '@/components/Reaction.vue'
   import Finish from '@/components/Finish.vue'
   import Error from './Error.vue'
-  import store from '@/store'
-
-  const { stages } = store.state
 
   export default {
     name: 'App',
@@ -33,10 +23,32 @@
     data: () => ({
     }),
     computed: {
-      start: () => stages.start.isActive,
-      question: () => stages.question.isActive,
-      reaction: () => stages.reaction.isActive,
-      finish: () => stages.finish.isActive,
+      stage: vm => vm.$store.state.game.stage,
     },
   }
 </script>
+
+<style lang="sass">
+  .v-card
+    width: 498px
+    padding: 8px
+
+    .v-card__title
+      display: flex
+      justify-content: center
+
+    .v-card__text
+      text-align: center
+
+    .image-wrapper
+      display: flex
+      justify-content: center
+      padding: 8px
+
+    .v-image
+      border-radius: 4px
+
+    .v-card__actions
+      display: flex
+      flex-direction: column
+</style>
