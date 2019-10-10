@@ -1,20 +1,16 @@
 export default {
   player: {
-    stats: [
-      {
-        name: '',
-        icon: '',
-        value: 0,
-      },
-    ],
+    stats: [],
   },
 
   game: {
     UUID: '',
-    stage: 'start',
-    questionNumber: 0,
+    stage: 'greeting',
+    questionId: 0,
+    questionsAmount: 0,
     title: 'No data',
     description: '',
     image: '',
+    answers: [],
   },
 }

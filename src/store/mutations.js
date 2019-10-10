@@ -1,10 +1,9 @@
-import * as Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
+import uuidv4 from 'uuid'
 
 export default {
   getGameInfo (state, payload) {
     const gameInfo = payload.attributes
-    const playerInfo =
-      Object.values(payload.relationships.characteristics.data)
 
     state.game = {
       ...state.game,
@@ -12,20 +11,65 @@ export default {
       description: gameInfo.description,
       image: gameInfo.image,
     }
-
-    state.player.stats = playerInfo.map(stat => ({
-      name: stat.attributes.name,
-      icon: stat.attributes.icon,
-    }))
   },
 
   getGameUUID (state, payload) {
     state.game.UUID = payload
   },
 
-  startGame (state, payload) {
-    state.game.stage = 'question'
+  setGameUUID (state) {
+    const newUUID = uuidv4()
+    state.game.UUID = newUUID
+    Cookies.set('gameUUID', newUUID, /* { expires: ? } */)
+  },
 
-    // state
+  getPlayerStats (state, payload) {
+    state.player.stats = payload.map((stat) => {
+      const { value } = stat.attributes
+      return {
+        name: stat.attributes.name,
+        icon: stat.attributes.icon,
+        value: value || 0,
+      }
+    })
+  },
+
+  continueGame (state, payload) {
+    const responseType = payload.meta.question.data.type
+    const playerStats = payload.relationships.characteristics.data
+
+    let stage,
+      stageData
+
+    switch (responseType) {
+      case 'reactions':
+        stage = 'reaction'
+        break
+      default:
+        stage = 'question'
+        stageData = payload.meta.question.data
+        break
+    }
+
+    state.game = {
+      ...state.game,
+      stage,
+      title: stageData.attributes.name,
+      description: stageData.attributes.description,
+      image: stageData.attributes.image,
+      questionId: stageData.meta.index + 1,
+      questionsAmount: stageData.meta.count,
+    }
+
+    state.player.stats = state.player.stats.map((stat, index) => ({
+      ...stat,
+      value: playerStats[index].meta.value,
+    }))
+
+    const answersData = stageData.relationships.answers.data
+    state.game.answers = answersData.map(answer => ({
+      id: answer.id,
+      text: answer.attributes.description,
+    }))
   },
 }

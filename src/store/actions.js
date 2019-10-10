@@ -1,18 +1,36 @@
-// const uuidv4 = require('uuid/v4')
-import uuidv4 from 'uuid'
+import Cookies from 'js-cookie'
 import api from '@/api'
 
 export default {
-  async getGameInfo ({ commit }) {
-    commit('getGameInfo', await api.getGameInfo())
-    commit('getGameUUID', uuidv4())
+  async getCurrentStage ({ commit, state }) {
+    const savedUUID = Cookies.get('gameUUID')
+
+    if (savedUUID) {
+      commit('getGameUUID', savedUUID)
+
+      const gameInfo = await api.continueGame(savedUUID)
+
+      commit('continueGame', gameInfo)
+      commit('getPlayerStats', gameInfo.relationships.characteristics.data)
+    } else {
+      commit('setGameUUID')
+
+      const gameInfo = await api.getGameInfo()
+
+      commit('getGameInfo', gameInfo)
+      commit('getPlayerStats', gameInfo.relationships.characteristics.data)
+    }
   },
 
   async startGame ({ commit, state }) {
-    commit('startGame', await api.startGame(state.game.UUID))
+    commit('continueGame', await api.startGame(state.game.UUID))
   },
 
-  async answerQuestion ({ commit }) {
-    commit('answerQuestion', await api.answerQuestion())
+  async answerQuestion ({ commit, state }, answerId) {
+    commit('answerQuestion', await api.answerQuestion(
+      state.game.UUID,
+      state.game.questionId,
+      answerId
+    ))
   },
 }
