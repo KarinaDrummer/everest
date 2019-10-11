@@ -9,6 +9,10 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/',
+      redirect: '/na_everest_liyboi_tsenoi',
+    },
+    {
       path: '/na_everest_liyboi_tsenoi',
       name: 'app',
       component: App,

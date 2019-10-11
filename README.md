@@ -11,7 +11,7 @@ yarn
 yarn run serve
 ```
 
-### Compile and minify for production
+### Build bundle for production
 ```
 yarn run build
 ```
@@ -24,4 +24,10 @@ yarn run test
 ### Lint and fix files
 ```
 yarn run lint
+```
+
+### Deploy bundle on Now service
+```
+npm i -g now
+yarn run deploy
 ```

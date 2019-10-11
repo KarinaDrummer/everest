@@ -1,11 +1,7 @@
 {
   "name": "everest",
   "version": "1.0.0",
-  "homepage": "http://everest.rina.wtf",
-  "deploymentCredentials": {
-    "username": "k",
-    "server": "rina.wtf"
-  },
+  "homepage": "https://everest.rina.now.sh/",
   "repository": {
     "type": "git",
     "url": "https://github.com/KarinaBauer/everest.git"
@@ -15,13 +11,11 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "node scripts/deploy",
-    "release": "npm run build && npm run deploy"
+    "deploy": "yarn run build && now --prod"
   },
   "dependencies": {
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
-    "gh-pages": "^2.1.1",
     "js-cookie": "^2.2.1",
     "register-service-worker": "^1.6.2",
     "roboto-fontface": "*",
