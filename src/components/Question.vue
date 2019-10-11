@@ -106,4 +106,5 @@
     border-radius: 4px
     outline: none
     background-color: #464650
+    color: #ffffff
 </style>
