@@ -6,6 +6,7 @@
       "
       v-text="title"
     />
+
     <player-stats
       values
       class="
@@ -13,6 +14,7 @@
         pl-3
       "
     />
+
     <v-card-text
       class="
         subtitle-1
@@ -21,6 +23,7 @@
       "
       v-html="description"
     />
+
     <div
       class="
         image-wrapper
@@ -35,6 +38,7 @@
         max-height="300"
       />
     </div>
+
     <v-card-actions
       class="
         d-flex
@@ -50,7 +54,9 @@
         color="brown"
         class="
           my-1
+          pa-2
           multiline-button
+          v-btn--contained
         "
         @click="answerQuestion(answer.id)"
       >
@@ -71,11 +77,12 @@
     },
     computed: {
       ...mapState({
-        title: s => `${s.game.questionId}/${s.game.questionsAmount}`,
-        description: s => s.game.description,
-        image: s => s.game.image,
-        answers: s => s.game.answers,
+        stage: s => s.game.question,
       }),
+      title: vm => `${vm.stage.id}/${vm.stage.of}`,
+      description: vm => vm.stage.description,
+      image: vm => vm.stage.image,
+      answers: vm => vm.stage.answers,
     },
     methods: {
       ...mapActions([
@@ -95,6 +102,8 @@
       margin: 0
 
   .multiline-button
+    width: 100%
     border-radius: 4px
     outline: none
+    background-color: #464650
 </style>

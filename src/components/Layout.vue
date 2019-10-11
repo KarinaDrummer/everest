@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <router-view class="app-wrapper" />
+
     <v-snackbar v-model="snackbar">
       {{ snackbarText }}
       <v-btn

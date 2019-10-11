@@ -21,7 +21,7 @@
         class="mr-1"
       >
       <span>
-        {{ stat.name }}{{ !greeting ? ': ' + stat.value : '' }}
+        {{ stat.name }}{{ greeting ? '' : ': ' + stat.value }}
       </span>
     </li>
   </ul>
@@ -33,8 +33,8 @@
   export default {
     name: 'PlayerStats',
     computed: mapState({
-      stats: s => s.player.stats,
-      greeting: s => s.game.stage === 'greeting',
+      stats: state => state.player.stats,
+      greeting: state => state.game.stage === 'greeting',
     }),
   }
 </script>

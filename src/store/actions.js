@@ -9,28 +9,40 @@ export default {
       commit('getGameUUID', savedUUID)
 
       const gameInfo = await api.continueGame(savedUUID)
-
       commit('continueGame', gameInfo)
       commit('getPlayerStats', gameInfo.relationships.characteristics.data)
     } else {
       commit('setGameUUID')
 
       const gameInfo = await api.getGameInfo()
-
       commit('getGameInfo', gameInfo)
       commit('getPlayerStats', gameInfo.relationships.characteristics.data)
     }
   },
 
-  async startGame ({ commit, state }) {
-    commit('continueGame', await api.startGame(state.game.UUID))
+  async startNewGame ({ commit, state }) {
+    Cookies.remove('gameUUID')
+    commit('setGameUUID')
+    commit('startNewGame', await api.startNewGame(state.game.UUID))
+  },
+
+  async continueGame ({ commit, state }) {
+    commit('continueGame', await api.continueGame(state.game.UUID))
   },
 
   async answerQuestion ({ commit, state }, answerId) {
-    commit('answerQuestion', await api.answerQuestion(
+    commit('continueGame', await api.answerQuestion(
       state.game.UUID,
-      state.game.questionId,
+      state.game.question.id,
       answerId
     ))
+  },
+
+  async getNextQuestion ({ commit }) {
+    commit('getNextQuestion')
+  },
+
+  async getFinalScore ({ commit }) {
+    commit('getFinalScore')
   },
 }

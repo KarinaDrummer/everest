@@ -8,6 +8,7 @@
       "
       v-text="title"
     />
+
     <v-card-text
       class="
         subtitle-1
@@ -16,6 +17,7 @@
       "
       v-html="description"
     />
+
     <p
       class="
         player-stats-headline
@@ -32,6 +34,7 @@
         mb-2
       "
     />
+
     <div
       class="
         image-wrapper
@@ -46,6 +49,7 @@
         max-height="300"
       />
     </div>
+
     <v-card-actions
       class="
         d-flex
@@ -55,8 +59,8 @@
     >
       <v-btn
         block
-        color="error"
-        @click="startGame"
+        color="pink"
+        @click="startNewGame"
         v-text="'Поехали'"
       />
     </v-card-actions>
@@ -81,7 +85,7 @@
     },
     methods: {
       ...mapActions([
-        'startGame',
+        'startNewGame',
       ]),
     },
   }

@@ -22,7 +22,7 @@ export default {
     }
   },
 
-  startGame: async (gameUUID) => {
+  startNewGame: async (gameUUID) => {
     try {
       const response = await axios.post(
         `${baseUrl}/start`,
@@ -59,8 +59,7 @@ export default {
           answer_id: answerId,
         },
       )
-      console.log(response)
-      return response.data
+      return response.data.data
     } catch (error) {
       errorHandler(error)
       throw new Error(error)

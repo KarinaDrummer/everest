@@ -9,6 +9,7 @@
   import Greeting from '@/components/Greeting.vue'
   import Question from '@/components/Question.vue'
   import Reaction from '@/components/Reaction.vue'
+  import Finish from '@/components/Finish.vue'
 
   export default {
     name: 'App',
@@ -16,11 +17,12 @@
       Greeting,
       Question,
       Reaction,
+      Finish,
     },
     data: () => ({
     }),
     computed: mapState({
-      stage: s => s.game.stage,
+      stage: state => state.game.stage,
     }),
     created () {
       this.getCurrentStage()
@@ -34,7 +36,12 @@
 </script>
 
 <style lang="sass">
+  .theme--dark.v-card
+    background-color: #282828
+
   .v-card
+    min-height: 400px
+
     .v-card__text
       line-height: 1.5
       color: #ffffff !important
