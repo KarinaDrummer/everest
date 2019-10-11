@@ -23,7 +23,7 @@ export default {
   async startNewGame ({ commit, state }) {
     Cookies.remove('gameUUID')
     commit('setGameUUID')
-    commit('startNewGame', await api.startNewGame(state.game.UUID))
+    commit('continueGame', await api.startNewGame(state.game.UUID)) // startNewGame
   },
 
   async continueGame ({ commit, state }) {

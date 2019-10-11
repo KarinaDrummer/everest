@@ -29,6 +29,7 @@
     />
     <player-stats
       class="
+        font-weight-bold
         justify-space-around
         pa-0
         mb-2

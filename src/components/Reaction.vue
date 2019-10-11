@@ -3,8 +3,10 @@
     <player-stats
       values
       class="
+        font-weight-light
+        flex-column
         justify-start
-        pl-3
+        pa-3
       "
     />
 

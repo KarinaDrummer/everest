@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie'
 import uuidv4 from 'uuid'
-import initialState from './state'
 
 export default {
   getGameInfo (state, payload) {
@@ -26,18 +25,30 @@ export default {
 
   getPlayerStats (state, payload) {
     state.player.stats = payload.map((stat) => {
-      console.log(stat.meta)
+      const attrs = stat.attributes
+      const value = 'value' in stat.meta ? stat.meta.value : 0
+
       return {
-        name: stat.attributes.name,
-        icon: stat.attributes.icon,
-        value: 0,
+        name: attrs.name,
+        icon: attrs.icon,
+        value,
       }
     })
   },
 
   startNewGame (state, payload) {
-    state.player = initialState.player
-    state.game = initialState.game
+    const gameInfo = payload.attributes
+
+    state.player = {
+      stats: [],
+    }
+
+    state.game.greeting = {
+      title: gameInfo.name,
+      description: gameInfo.description,
+      image: gameInfo.image,
+    }
+
     state.stage = 'greeting'
   },
 
@@ -63,6 +74,8 @@ export default {
         description: stageData.attributes.description,
         image: stageData.attributes.image,
       }
+    } else {
+      Game.finished = false
     }
 
     if (haveQuestion) {

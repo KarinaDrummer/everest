@@ -12,7 +12,6 @@
       class="
         d-flex
         justify-center
-        font-weight-bold
         pa-2
       "
     >

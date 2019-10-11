@@ -1,10 +1,19 @@
 <template>
   <v-card width="500px">
+    <v-card-title
+      class="
+        display-1
+        d-flex
+        justify-center
+      "
+      v-text="title"
+    />
+
     <player-stats
       values
       class="
-        justify-start
-        pl-3
+        justify-space-around
+        pa-3
       "
     />
 
