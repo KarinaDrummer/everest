@@ -10,7 +10,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/na_everest_liyboi_tsenoi',
+      name: 'app',
+      component: App,
     },
     {
       path: '/na_everest_liyboi_tsenoi',
