@@ -12,7 +12,6 @@ export default {
       commit('continueGame', gameInfo)
       commit('getPlayerStats', gameInfo.relationships.characteristics.data)
     } else {
-
       const gameInfo = await api.getGameInfo()
       commit('getGameInfo', gameInfo)
       commit('getPlayerStats', gameInfo.relationships.characteristics.data)
