@@ -26,7 +26,7 @@
     >
       <v-img
         :src="image"
-        lazy-src="/img/web_loader_dribble.gif"
+        lazy-src="/img/web_loader.gif"
         max-width="476"
         max-height="300"
       />
