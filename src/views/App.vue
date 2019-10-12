@@ -48,11 +48,10 @@
     .v-image
       border-radius: 4px
 
-  .v-card__text
-    line-height: 1.5
-    color: #ffffff !important
+    .v-card__text
+      color: #ffffff !important
 
-  .v-card__text a
-    color: #fdff8c
-    text-decoration: none
+    .v-card__text a
+      color: #fdff8c
+      text-decoration: none
 </style>
