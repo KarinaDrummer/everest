@@ -21,9 +21,11 @@ export default {
     const newUUID = uuidv4()
     const lifetimeMinutes = 5
     const expires = new Date()
-    .setTime(
+    expires.setTime(
       Date.now() + (lifetimeMinutes * 60 * 1000)
     )
+
+    console.log(typeof (expires))
 
     state.game.UUID = newUUID
     Cookies.set('gameUUID', newUUID, { expires })
