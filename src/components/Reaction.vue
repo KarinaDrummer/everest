@@ -10,19 +10,7 @@
       "
     />
 
-    <div
-      class="
-        image-wrapper
-        d-flex
-        justify-center
-      "
-    >
-      <v-img
-        :src="image"
-        lazy-src="/img/web_loader.gif"
-        max-width="476"
-      />
-    </div>
+    <lazy-image :src="image" />
 
     <v-card-text
       class="
@@ -60,11 +48,13 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import LazyImage from './LazyImage.vue'
   import PlayerStats from './PlayerStats.vue'
 
   export default {
     name: 'Reaction',
     components: {
+      LazyImage,
       PlayerStats,
     },
     computed: {
