@@ -5,7 +5,7 @@ export default {
   async getCurrentStage ({ commit, state }) {
     const savedUUID = Cookies.get('gameUUID')
 
-    if (savedUUID) {
+    if (savedUUID && state.game.stage !== 'greeting') {
       commit('getGameUUID', savedUUID)
 
       const gameInfo = await api.continueGame(savedUUID)
