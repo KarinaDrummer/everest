@@ -19,9 +19,12 @@
         :src="stat.icon"
         class="mr-1"
       >
-      <span>
-        {{ stat.name }}{{ greeting ? '' : ': ' + stat.value }}
-      </span>
+      <span
+        v-text="stat.name + `${greeting ? '' : ': ' + stat.value}`"
+      />
+      <sup
+        v-text="'change' in stat ? stat.change : null"
+      />
     </li>
   </ul>
 </template>
@@ -31,10 +34,12 @@
 
   export default {
     name: 'PlayerStats',
-    computed: mapState({
-      stats: state => state.player.stats,
-      greeting: state => state.game.stage === 'greeting',
-    }),
+    computed: {
+      ...mapState({
+        stats: state => state.player.stats,
+        greeting: state => state.game.stage === 'greeting',
+      }),
+    },
   }
 </script>
 
