@@ -7,7 +7,7 @@ export default {
 
   game: {
     UUID: '',
-    stage: 'greeting',
+    stage: '',
     finished: false,
     greeting: {
       title: placeholder,

@@ -5,14 +5,13 @@ export default {
   async getCurrentStage ({ commit, state }) {
     const savedUUID = Cookies.get('gameUUID')
 
-    if (savedUUID && state.game.stage !== 'greeting') {
+    if (savedUUID) {
       commit('getGameUUID', savedUUID)
 
       const gameInfo = await api.continueGame(savedUUID)
       commit('continueGame', gameInfo)
       commit('getPlayerStats', gameInfo.relationships.characteristics.data)
     } else {
-      commit('setGameUUID')
 
       const gameInfo = await api.getGameInfo()
       commit('getGameInfo', gameInfo)
@@ -21,9 +20,8 @@ export default {
   },
 
   async startNewGame ({ commit, state }) {
-    Cookies.remove('gameUUID')
     commit('setGameUUID')
-    commit('continueGame', await api.startNewGame(state.game.UUID)) // startNewGame
+    commit('continueGame', await api.startNewGame(state.game.UUID))
   },
 
   async continueGame ({ commit, state }) {

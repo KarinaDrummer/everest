@@ -7,6 +7,7 @@ export default {
 
     state.game = {
       ...state.game,
+      stage: 'greeting',
       title: gameInfo.name,
       description: gameInfo.description,
       image: gameInfo.image,
@@ -18,6 +19,8 @@ export default {
   },
 
   setGameUUID (state) {
+    Cookies.remove('gameUUID')
+
     const newUUID = uuidv4()
     const lifetimeMinutes = 5
     const expires = new Date()
