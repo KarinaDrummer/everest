@@ -62,8 +62,4 @@ html
   flex-direction: column
   align-items: center
   justify-content: center
-
-  .v-card__text a
-    color: #fdff8c
-    text-decoration: none
 </style>

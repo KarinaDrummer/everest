@@ -42,10 +42,17 @@
   .v-card
     min-height: 400px
 
-    .v-card__text
-      line-height: 1.5
-      color: #ffffff !important
+    .image-wrapper
+      min-height: 200px
 
     .v-image
       border-radius: 4px
+
+  .v-card__text
+    line-height: 1.5
+    color: #ffffff !important
+
+  .v-card__text a
+    color: #fdff8c
+    text-decoration: none
 </style>

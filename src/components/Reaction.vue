@@ -21,7 +21,6 @@
         :src="image"
         lazy-src="/img/web_loader.gif"
         max-width="476"
-        max-height="300"
       />
     </div>
 
