@@ -19,8 +19,14 @@ export default {
 
   setGameUUID (state) {
     const newUUID = uuidv4()
+    const lifetimeMinutes = 5
+    const expires = new Date()
+    .setTime(
+      Date.now() + (lifetimeMinutes * 60 * 1000)
+    )
+
     state.game.UUID = newUUID
-    Cookies.set('gameUUID', newUUID, /* { expires: ? } */)
+    Cookies.set('gameUUID', newUUID, { expires })
   },
 
   getPlayerStats (state, payload) {
