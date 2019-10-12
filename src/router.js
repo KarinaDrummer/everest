@@ -15,7 +15,7 @@ export default new Router({
     },
     {
       path: '/na_everest_liyboi_tsenoi',
-      name: 'app',
+      name: 'application',
       component: App,
     },
     {
