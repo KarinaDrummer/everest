@@ -6,7 +6,7 @@
         font-weight-light
         flex-column
         justify-start
-        pa-3
+        pa-4
       "
     />
 
