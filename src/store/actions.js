@@ -1,38 +1,44 @@
-import Cookies from 'js-cookie'
 import api from '@/api'
 
 export default {
-  async getCurrentStage ({ commit, state }) {
-    const savedUUID = Cookies.get('gameUUID')
+  async setStage ({ dispatch, commit, state }) {
+    commit('getGameUUID')
 
-    if (savedUUID) {
-      commit('getGameUUID', savedUUID)
-
-      const gameInfo = await api.continueGame(savedUUID)
-      commit('continueGame', gameInfo)
-      commit('getPlayerStats', gameInfo.relationships.characteristics.data)
-    } else {
-      const gameInfo = await api.getGameInfo()
-      commit('getGameInfo', gameInfo)
-      commit('getPlayerStats', gameInfo.relationships.characteristics.data)
-    }
+    state.game.UUID
+      ? await dispatch('continueGame')
+      : await dispatch('showIntro')
   },
 
-  async startNewGame ({ commit, state }) {
+  async getPlayerStats ({ commit }, data) {
+    commit('getPlayerStats', data || await api.getGameInfo())
+  },
+
+  async showIntro ({ dispatch, commit }) {
+    const data = await api.getGameInfo()
+    commit('showIntro', data)
+    await dispatch('getPlayerStats', data)
+  },
+
+  async startNewGame ({ dispatch, commit, state }) {
     commit('setGameUUID')
-    commit('continueGame', await api.startNewGame(state.game.UUID))
+    const data = await api.startNewGame(state.game.UUID)
+    commit('continueGame', data)
+    await dispatch('getPlayerStats', data)
   },
 
-  async continueGame ({ commit, state }) {
-    commit('continueGame', await api.continueGame(state.game.UUID))
+  async continueGame ({ dispatch, commit, state }) {
+    const data = await api.continueGame(state.game.UUID)
+    commit('continueGame', data)
+    await dispatch('getPlayerStats', data)
   },
 
-  async answerQuestion ({ commit, state }, answerId) {
-    commit('continueGame', await api.answerQuestion(
+  async answerQuestion ({ dispatch, commit, state }, answerID) {
+    const data = await api.answerQuestion(
       state.game.UUID,
       state.game.question.id,
-      answerId
-    ))
+      answerID
+    )
+    await dispatch('continueGame', data)
   },
 
   async getNextQuestion ({ commit }) {

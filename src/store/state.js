@@ -8,8 +8,8 @@ export default {
   game: {
     UUID: '',
     stage: '',
-    finished: false,
-    greeting: {
+    isFinished: false,
+    intro: {
       title: placeholder,
       description: placeholder,
       image: '',

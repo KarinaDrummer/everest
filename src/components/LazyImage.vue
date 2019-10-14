@@ -9,6 +9,7 @@
     <v-img
       :src="src"
       max-width="476"
+      max-height="500"
     >
       <template v-slot:placeholder>
         <v-row

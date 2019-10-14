@@ -6,7 +6,7 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  import Greeting from '@/components/Greeting.vue'
+  import Intro from '@/components/Intro.vue'
   import Question from '@/components/Question.vue'
   import Reaction from '@/components/Reaction.vue'
   import Finish from '@/components/Finish.vue'
@@ -14,7 +14,7 @@
   export default {
     name: 'App',
     components: {
-      Greeting,
+      Intro,
       Question,
       Reaction,
       Finish,
@@ -25,11 +25,11 @@
       stage: state => state.game.stage,
     }),
     created () {
-      this.getCurrentStage()
+      this.setStage()
     },
     methods: {
       ...mapActions([
-        'getCurrentStage',
+        'setStage',
       ]),
     },
   }

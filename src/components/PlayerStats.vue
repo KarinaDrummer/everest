@@ -20,10 +20,10 @@
         class="mr-1"
       >
       <span
-        v-text="stat.name + `${greeting ? '' : ': ' + stat.value}`"
+        v-text="stat.name + `${intro ? '' : ': ' + stat.value}`"
       />
       <sup
-        v-text="'change' in stat ? stat.change : null"
+        v-text="reaction ? stat.change : null"
       />
     </li>
   </ul>
@@ -37,8 +37,10 @@
     computed: {
       ...mapState({
         stats: state => state.player.stats,
-        greeting: state => state.game.stage === 'greeting',
+        stage: state => state.game.stage,
       }),
+      intro: vm => vm.stage === 'intro',
+      reaction: vm => vm.stage === 'reaction',
     },
   }
 </script>

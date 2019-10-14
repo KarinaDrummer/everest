@@ -60,7 +60,7 @@
     computed: {
       ...mapState({
         stage: s => s.game.reaction,
-        gameIsFinished: s => s.game.finished,
+        gameIsFinished: s => s.game.isFinished,
       }),
       title: vm => `${vm.stage.id}/${vm.stage.of}`,
       description: vm => vm.stage.description,

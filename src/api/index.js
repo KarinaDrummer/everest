@@ -26,9 +26,7 @@ export default {
     try {
       const response = await axios.post(
         `${baseUrl}/start`,
-        {
-          current_game_id: gameUUID,
-        },
+        { current_game_id: gameUUID },
       )
       return response.data.data
     } catch (error) {

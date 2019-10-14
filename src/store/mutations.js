@@ -1,27 +1,18 @@
 import Cookies from 'js-cookie'
 import uuidv4 from 'uuid'
 
+const haveReaction = data => 'reaction' in data
+const haveQuestion = data => 'question' in data
+
 export default {
-  getGameInfo (state, payload) {
-    const gameInfo = payload.attributes
-
-    state.game = {
-      ...state.game,
-      stage: 'greeting',
-      title: gameInfo.name,
-      description: gameInfo.description,
-      image: gameInfo.image,
-    }
-  },
-
-  getGameUUID (state, payload) {
-    state.game.UUID = payload
+  getGameUUID (state) {
+    state.game.UUID = Cookies.get('gameUUID')
   },
 
   setGameUUID (state) {
     Cookies.remove('gameUUID')
 
-    const lifetimeMinutes = 5
+    const lifetimeMinutes = 1440
     const expires = new Date()
     expires.setTime(
       Date.now() + (lifetimeMinutes * 60 * 1000)
@@ -33,66 +24,67 @@ export default {
   },
 
   getPlayerStats (state, payload) {
-    state.player.stats = payload.map((stat) => {
-      const attrs = stat.attributes
-      const value = 'value' in stat.meta ? stat.meta.value : 0
+    const statsData = payload.relationships.characteristics.data
+    const diffData = state.game.stage === 'reaction' &&
+      payload.meta.reaction.data.relationships.diff
 
-      return {
-        name: attrs.name,
-        icon: attrs.icon,
-        value,
+    state.player.stats = statsData.map((data, i) => {
+      const stat = {
+        name: data.attributes.name,
+        icon: data.attributes.icon,
+        value: 'value' in data.meta ? data.meta.value : 0,
       }
+
+      if (diffData) {
+        const { diff } = diffData.data[i].meta
+        stat.change = diff < 0 ? diff.toString() : `+${diff}`
+      }
+
+      return stat
     })
   },
 
-  startNewGame (state, payload) {
+  showIntro (state, payload) {
     const gameInfo = payload.attributes
 
     state.player = {
       stats: [],
     }
 
-    state.game.greeting = {
+    state.game.intro = {
       title: gameInfo.name,
       description: gameInfo.description,
       image: gameInfo.image,
     }
 
-    state.stage = 'greeting'
+    state.game.stage = 'intro'
   },
 
   continueGame (state, payload) {
-    const Game = state.game
-    const Player = state.player
-    const PlayerStats = payload.relationships.characteristics.data
-
-    const isFinished = payload.attributes.finished
-    const haveQuestion = 'question' in payload.meta
-    const haveReaction = 'reaction' in payload.meta
-
     let stage
 
-    if (isFinished) {
-      Game.finished = true
+    if (payload.attributes.finished) {
+      state.game.isFinished = true
       stage = 'reaction'
+
       const stageData = payload.meta.ending.data
 
-      Game.finish = {
-        ...Game.finish,
+      state.game.finish = {
+        ...state.game.finish,
         title: stageData.attributes.name,
         description: stageData.attributes.description,
         image: stageData.attributes.image,
       }
     } else {
-      Game.finished = false
+      state.game.isFinished = false
     }
 
-    if (haveQuestion) {
+    if (haveQuestion(payload.meta)) {
       stage = 'question'
       const stageData = payload.meta.question.data
 
-      Game.question = {
-        ...Game.question,
+      state.game.question = {
+        ...state.game.question,
         title: stageData.attributes.name,
         description: stageData.attributes.description,
         image: stageData.attributes.image,
@@ -101,30 +93,25 @@ export default {
       }
 
       const answersData = stageData.relationships.answers.data
-      Game.question.answers = answersData.map(answer => ({
+      state.game.question.answers = answersData.map(answer => ({
         id: answer.id,
         text: answer.attributes.description,
       }))
     }
 
-    if (haveReaction) {
+    if (haveReaction(payload.meta)) {
       stage = 'reaction'
       const stageData = payload.meta.reaction.data
 
-      Game.reaction = {
-        ...Game.reaction,
+      state.game.reaction = {
+        ...state.game.reaction,
         title: stageData.attributes.name,
         description: stageData.attributes.description,
         image: stageData.attributes.image,
       }
     }
 
-    Player.stats = Player.stats.map((stat, index) => ({
-      ...stat,
-      value: PlayerStats[index].meta.value,
-    }))
-
-    Game.stage = stage
+    state.game.stage = stage
   },
 
   getNextQuestion (state) {

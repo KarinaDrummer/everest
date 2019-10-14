@@ -61,17 +61,18 @@
   import PlayerStats from './PlayerStats.vue'
 
   export default {
-    name: 'Greeting',
+    name: 'Intro',
     components: {
       LazyImage,
       PlayerStats,
     },
     computed: {
       ...mapState({
-        title: s => s.game.title,
-        description: s => s.game.description,
-        image: s => s.game.image,
+        stage: state => state.game.intro,
       }),
+      title: vm => vm.stage.title,
+      description: vm => vm.stage.description,
+      image: vm => vm.stage.image,
     },
     methods: {
       ...mapActions([
