@@ -38,6 +38,7 @@ export default {
       if (diffData) {
         const { diff } = diffData.data[i].meta
         stat.change = diff < 0 ? diff.toString() : `+${diff}`
+        stat.class = diff < 0 ? 'decrement' : 'increment'
       }
 
       return stat

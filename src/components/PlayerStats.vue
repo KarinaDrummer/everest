@@ -23,6 +23,7 @@
         v-text="stat.name + `${intro ? '' : ': ' + stat.value}`"
       />
       <sup
+        :class="stat.class"
         v-text="reaction ? stat.change : null"
       />
     </li>
@@ -49,6 +50,15 @@
   .player-stats
     text-transform: uppercase
     list-style-type: none
+
+    .increment, .decrement
+      font-weight: 500
+
+    .increment
+      color: #28a745 !important
+
+    .decrement
+      color: #dc3545 !important
 
     img
       width: 20px
