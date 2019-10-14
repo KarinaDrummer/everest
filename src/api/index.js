@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const baseUrl = 'https://game.heroleague.ru/api/v1/games/na_everest_liyboi_tsenoi'
+const apiRoot = process.env.VUE_APP_API_ROOT
+const gameCode = 'na_everest_liyboi_tsenoi'
+const baseURL = apiRoot + gameCode
 
 const errorHandler = (error) => {
   window.dispatchEvent(
@@ -14,7 +16,7 @@ const errorHandler = (error) => {
 export default {
   getGameInfo: async () => {
     try {
-      const response = await axios.get(baseUrl)
+      const response = await axios.get(baseURL)
       return response.data.data
     } catch (error) {
       errorHandler(error)
@@ -25,7 +27,7 @@ export default {
   startNewGame: async (gameUUID) => {
     try {
       const response = await axios.post(
-        `${baseUrl}/start`,
+        `${baseURL}/start`,
         { current_game_id: gameUUID },
       )
       return response.data.data
@@ -38,7 +40,7 @@ export default {
   continueGame: async (gameUUID) => {
     try {
       const response = await axios.get(
-        `${baseUrl}/current?current_game_id=${gameUUID}`
+        `${baseURL}/current?current_game_id=${gameUUID}`
       )
       return response.data.data
     } catch (error) {
@@ -50,7 +52,7 @@ export default {
   answerQuestion: async (gameUUID, questionId, answerId) => {
     try {
       const response = await axios.post(
-        `${baseUrl}/answer`,
+        `${baseURL}/answer`,
         {
           current_game_id: gameUUID,
           question_id: questionId,
