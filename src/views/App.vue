@@ -41,6 +41,8 @@
 
   .v-card
     min-height: 400px
+    overflow-y: auto
+    overflow-x: hidden
 
     .image-wrapper
       min-height: 200px
