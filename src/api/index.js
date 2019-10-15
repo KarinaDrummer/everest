@@ -1,8 +1,6 @@
 import axios from 'axios'
 
-const apiRoot = process.env.VUE_APP_API_ROOT
-const gameCode = 'na_everest_liyboi_tsenoi'
-const baseURL = apiRoot + gameCode
+const baseURL = process.env.VUE_APP_API_ROOT
 
 const errorHandler = (error) => {
   window.dispatchEvent(
@@ -14,9 +12,9 @@ const errorHandler = (error) => {
 }
 
 export default {
-  getGameInfo: async () => {
+  getGameInfo: async (gameCode) => {
     try {
-      const response = await axios.get(baseURL)
+      const response = await axios.get(baseURL + gameCode)
       return response.data.data
     } catch (error) {
       errorHandler(error)
@@ -24,10 +22,10 @@ export default {
     }
   },
 
-  startNewGame: async (gameUUID) => {
+  startNewGame: async (gameCode, gameUUID) => {
     try {
       const response = await axios.post(
-        `${baseURL}/start`,
+        `${baseURL + gameCode}/start`,
         { current_game_id: gameUUID },
       )
       return response.data.data
@@ -37,10 +35,10 @@ export default {
     }
   },
 
-  continueGame: async (gameUUID) => {
+  continueGame: async (gameCode, gameUUID) => {
     try {
       const response = await axios.get(
-        `${baseURL}/current?current_game_id=${gameUUID}`
+        `${baseURL + gameCode}/current?current_game_id=${gameUUID}`
       )
       return response.data.data
     } catch (error) {
@@ -49,14 +47,14 @@ export default {
     }
   },
 
-  answerQuestion: async (gameUUID, questionId, answerId) => {
+  answerQuestion: async (gameCode, gameUUID, questionID, answerID) => {
     try {
       const response = await axios.post(
-        `${baseURL}/answer`,
+        `${baseURL + gameCode}/answer`,
         {
           current_game_id: gameUUID,
-          question_id: questionId,
-          answer_id: answerId,
+          question_id: questionID,
+          answer_id: answerID,
         },
       )
       return response.data.data
