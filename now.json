@@ -1,4 +1,9 @@
 {
   "version": 2,
-  "name": "everest"
+  "name": "everest",
+  "build": {
+    "env": {
+      "VUE_APP_API_ROOT": "@vue_app_api_root"
+    }
+  }
 }
